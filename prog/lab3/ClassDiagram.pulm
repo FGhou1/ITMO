@@ -1,0 +1,327 @@
+@startuml
+
+package interfaces {
+
+    interface Cheracters {
+    +String name()
+    +String interact()
+    }
+
+    interface EnumItem {
+    +int getChance()
+    +EnumParameters getApplication()
+    +String name()
+    }
+}
+
+package characters {
+   
+    class NullNPS {
+    +String name()
+    +String interact()
+    }
+
+    class BushesNPS {
+    - name: String
+    - employment: String
+    + interact(): String
+    }
+
+    class PalmNPS {
+    - name: String
+    - employment: String
+    + interact(): String
+    }
+
+    class StaringNPS {
+    - name: String
+    - employment: String
+    + interact(): String
+    }
+
+    class WreckageNPS {
+    - name: String
+    - employment: String
+    + interact(): String
+    }
+}
+
+NullNPS ..|> Cheracters
+BushesNPS ..|> Cheracters
+PalmNPS ..|> Cheracters
+StaringNPS ..|> Cheracters
+WreckageNPS ..|> Cheracters
+
+package items {
+
+    enum BushesItems {
+
+        +BERRIES: BushesItems
+        +SQUIRREL: BushesItems
+        +SEEDS: BushesItems
+        -int chance
+        -EnumParameters application
+        
+        +getChance(): int
+        +getApplication(): EnumParameters
+        +getAllChances(): int[]
+        +getAllNames(): String[]
+        +printAllNames(): void
+    }
+
+    enum PalmItems {
+
+        +COCONUT: PalmItems
+        +PARROT: PalmItems
+        +SEEDS: PalmItems
+        -int chance
+        -EnumParameters application
+        
+        +getChance(): int
+        +getApplication(): EnumParameters
+        +getAllChances(): int[]
+        +getAllNames(): String[]
+        +printAllNames(): void
+    }
+
+    enum StartingLocationItems {
+
+        +BOX: StartingLocationItems
+        -int chance
+        -EnumParameters application
+        
+        +getChance(): int
+        +getApplication(): EnumParameters
+        +getAllChances(): int[]
+        +getAllNames(): String[]
+        +printAllNames(): void
+    }
+
+    enum WreckageItems {
+
+        +BOX: WreckageItems
+        +ROPES: WreckageItems
+        +TRASH: WreckageItems
+        -int chance
+        -EnumParameters application
+        
+        +getChance(): int
+        +getApplication(): EnumParameters
+        +getAllChances(): int[]
+        +getAllNames(): String[]
+        +printAllNames(): void
+    }
+}
+
+BushesItems ..|> EnumItem
+PalmItems ..|> EnumItem
+StartingLocationItems ..|> EnumItem
+WreckageItems ..|> EnumItem
+
+package locations {
+    class Bushes {
+
+        -BushesNPS farmerNPS
+        -List<EnumItem> spawnedItem
+
+        +Bushes()
+        +List<EnumItem> getSpawnedItem()
+        +void printSpawnedItem()
+        +String toString()
+    }
+
+    abstract class Location <T extends Enum<T>> {
+
+        -String name
+        -List<EnumItem> spawnedItems
+        -Cheracters spawnedPerson
+        
+        +Location(String name)
+        +String getName()
+        +List<EnumItem> getSpawnedItems()
+        +Cheracters getspawnedPerson()
+        #List<EnumItem> generateItems(T[] objects, int[] chances)
+        #void generatePerson(Cheracters person)
+        +boolean equals(Object obj)
+    }
+
+    class Palm {
+
+        - List<EnumItem> spawnedItems
+        - PalmNPS modelNPS
+
+        + Palm()
+        + List<EnumItem> getSpawnedItem()
+        + void printSpawnedItem()
+        + String toString()
+    }
+
+    class StartingLocation {
+
+        - List<EnumItem> spawnedItem
+
+        + StartingLocation()
+        + List<EnumItem> getSpawnedItem()
+        + void printSpawnedItem()
+        + String toString()
+    }
+
+    class Wreckage {
+
+        - WreckageNPS engineerNPS
+        - List<EnumItem> spawnedItems
+
+        + Wreckage()
+        + List<EnumItem> getSpawnedItem()
+        + void printSpawnedItem()
+        + String toString()
+    }
+}
+
+Bushes --|> Location
+Palm --|> Location
+StartingLocation --|> Location
+Wreckage --|> Location
+
+package interfaces {
+
+    interface EnumItem {
+        int getChance()
+        EnumParameters getApplication()
+        String name()
+    }
+
+    interface Cheracters {
+        String name();
+        String interact();
+    }
+
+    interface GardenMove {
+        void plantSeeds();
+        void takeCareOfThePlant();
+        boolean harvest();
+    }
+
+    interface SmartMove {
+        void think();
+        boolean create();
+    }
+
+
+    interface SpecialMove {
+        boolean haveSex();
+        void flirting();
+    }
+}
+
+package mechanics {
+    enum EnumParameters {
+        +EAT: EnumParameters
+        +LOOK: EnumParameters
+        +PLANT: EnumParameters
+        +CREATE: EnumParameters
+        +NOTHING: EnumParameters
+    }
+
+    class GameLoop {
+        -Person hero
+        -LocationList locationList
+        -ScannerChecker scannerChecker
+        -Masages masages
+
+        +GameLoop(Person hero, LocationList locationList)
+        +void startGame()
+    }
+
+    class LocationList {
+        -List<Location<?>> locations
+
+        +void addLocation(Location<?> location)
+        +List<Location<?>> getList()
+        +String[] getLocationNamesArray()
+    }
+
+    class Masages {
+        +void greetingsMasage()
+        +void indicatorsMasage(Person hero)
+        +void choiceMasage()
+        +void spawnItems(List<Location<?>> locationList)
+        +void messagePackaging(ArrayList<String> massage)
+        +void messagePackaging(String massage)
+        +void farewellMessage(Person hero)
+    }
+
+    class ScannerChecker {
+        -Scanner scanner
+        -Masages masages
+        +int getUserChoice(int maxOptions)
+        +int getUserChoice(String[] array)
+        +void closeScanner()
+    }
+}
+
+package people{
+    abstract class Person {
+        -int energy
+        -Location<?> location
+        -boolean visionLocationflag
+        -boolean victoryConditionflag
+        -Masages masages
+
+        +void setEnergy(int energy)
+        +void setLocation(Location<?> location)
+        +void setVisionLocationflag(boolean visionLocationflag)
+        +void setVictoryConditionflag(boolean victoryConditionflag)
+        +int getEnergy()
+        +Location<?> getLocation()
+        +boolean getVisionLocationflag()
+        +boolean getVictoryConditionflag()
+        +void getLocation(LocationList locationList)
+        +void goTo(LocationList locationList)
+    }
+
+    class Farmer{
+        -boolean seedsPlanted
+        -boolean plantCaredFor
+
+        +Farmer()
+        +void skip()
+        +void doAction_part2()
+        +void plantSeeds()
+        +void takeCareOfThePlant()
+        +boolean harvest()
+        -void resetPlantingCycle()
+    }
+
+    class Model {
+        -boolean flirting
+
+        +Model()
+        +void skip()
+        +void doAction_part2()
+        +void flirting()
+        +boolean haveSex()
+    }
+
+    class Engineer {
+        -boolean think
+
+        +Engineer()
+        +void skip()
+        +void doAction_part2()
+        +void think()
+        +boolean create()
+    }
+}
+
+Model --|> Person
+Farmer --|> Person
+Engineer --|> Person
+
+Model ..|> SpecialMove
+Farmer ..|> GardenMove
+Engineer ..|> SmartMove
+
+@enduml
+
+
