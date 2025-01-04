@@ -140,7 +140,7 @@ package locations {
         +String getName()
         +List<EnumItem> getSpawnedItems()
         +Cheracters getspawnedPerson()
-        #List<EnumItem> generateItems(T[] objects, int[] chances)
+        #List<EnumItem> generateItems(EnumItem[] objects, int[] chances)
         #void generatePerson(Cheracters person)
         +boolean equals(Object obj)
     }
