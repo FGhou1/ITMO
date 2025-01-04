@@ -24,10 +24,10 @@ public abstract class Location <T extends Enum<T>>{
     public Cheracters getspawnedPerson() { return spawnedPerson; } 
 
     @SuppressWarnings("unchecked")
-    protected List<EnumItem> generateItems(T[] objects, int[] chances) {
+    protected List<EnumItem> generateItems(EnumItem[] objects, int[] chances) {
 
         Random random = new Random();
-        List<T> selectedItems = new ArrayList<>();
+        List<EnumItem> selectedItems = new ArrayList<>();
         int roll = random.nextInt(100) + 1; 
 
         for (int count = 0; count < objects.length; count++) { 
@@ -35,8 +35,8 @@ public abstract class Location <T extends Enum<T>>{
                 selectedItems.add(objects[count]);
             }
         }
-        spawnedItems = (List<EnumItem>) selectedItems;
-        return (List<EnumItem>) selectedItems;
+        spawnedItems = selectedItems;
+        return selectedItems;
     }
 
     protected void generatePerson(Cheracters person) {
