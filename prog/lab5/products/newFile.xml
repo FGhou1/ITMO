@@ -1,0 +1,49 @@
+<root>
+    <movie>
+        <id>0</id>
+        <name>ЛАБА ПО ОПД</name>
+        <coordinates>
+            <x>11</x>
+            <y>12</y>
+        </coordinates>
+        <creationDate>Tue Apr 01 19:58:05 ALMT 2025</creationDate>
+        <oscarsCount>69</oscarsCount>
+        <genre>HORROR</genre>
+        <mpaaRating>NC_17</mpaaRating>
+        <director>
+            <name>преподаватель</name>
+            <passportID>000001</passportID>
+            <hairColor>RED</hairColor>
+        </director>
+    </movie>
+    <movie>
+        <id>3</id>
+        <name>Сладкий сон</name>
+        <coordinates>
+            <x>12</x>
+            <y>13</y>
+        </coordinates>
+        <creationDate>Tue Apr 01 19:58:05 ALMT 2025</creationDate>
+        <oscarsCount>100</oscarsCount>
+        <genre>SCIENCE_FICTION</genre>
+        <mpaaRating>G</mpaaRating>
+        <director>
+            <name>Студент</name>
+            <passportID>101010</passportID>
+            <hairColor>OTHER</hairColor>
+        </director>
+    </movie>
+    <movie>
+        <id>1</id>
+        <name>Зачет по физре</name>
+        <coordinates>
+            <x>22</x>
+            <y>33</y>
+        </coordinates>
+        <creationDate>Tue Apr 01 19:58:05 ALMT 2025</creationDate>
+        <oscarsCount>111</oscarsCount>
+        <genre>ACTION</genre>
+        <mpaaRating></mpaaRating>
+        <director></director>
+    </movie>
+</root>
